@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import Homepage from "Pages/Homepage/Homepage";
+import Movies from "Pages/Movies/Movies";
+import Ticket from "Pages/Ticket/Ticket";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
+import HomeTemplate from "Templates/HomeTemplate";
+
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <CssBaseline />
+      <Routes>
+        <Route path="" element={<HomeTemplate />}>
+          <Route path="ticket" element={<Ticket />} />
+          <Route path="movies" element={<Movies />} />
+
+          <Route index element={<Homepage />} />
+          <Route path="*" element={<Navigate to={""} />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
