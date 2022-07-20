@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-
+import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import {
   Logo,
@@ -8,42 +8,48 @@ import {
   StyledAppBar,
   StyledPersonIcon,
   StyledLogIn,
-  LogInBox,
+  ModalBox,
 } from "./HeaderStyles";
-import galaxyLogo from "Assets/galaxy-logo.png";
-import { Modal, Typography, Box } from "@mui/material";
+import NavigationDrawer from "Components/Navbar/NavigationDrawer";
+
+import { Modal, Typography } from "@mui/material";
+import useWindowSize from "hooks/useWindowSize";
 
 const Header = () => {
+  const { windowSize } = useWindowSize();
+
   const [open, setOpenModal] = useState(false);
   const handleOpen = () => {
     setOpenModal(!open);
   };
+
   return (
     <StyledAppBar position="relative" color="transparent">
       <StyledToolbar>
         <Link to={""}>
-          <Logo src={galaxyLogo} />
+          <Logo />
         </Link>
-
-        <StyledLogIn onClick={handleOpen}>
-          <StyledPersonIcon /> <Typography variant="p">Đăng nhập</Typography>
-        </StyledLogIn>
+        <Box sx={{ display: "flex" }}>
+          {windowSize.width > 768 ? (
+            <StyledLogIn onClick={handleOpen}>
+              <StyledPersonIcon />{" "}
+              <Typography variant="p">Đăng nhập</Typography>
+            </StyledLogIn>
+          ) : (
+            <NavigationDrawer />
+          )}
+        </Box>
       </StyledToolbar>
 
-      <Modal
-        open={open}
-        onClose={handleOpen}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <LogInBox>
+      <Modal open={open} onClose={handleOpen}>
+        <ModalBox>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
           </Typography>
-        </LogInBox>
+        </ModalBox>
       </Modal>
     </StyledAppBar>
   );

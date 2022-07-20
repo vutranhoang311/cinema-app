@@ -1,23 +1,29 @@
 import React from "react";
 import { AppBar } from "@mui/material";
 import { StyledNavLink, NavigationBar } from "./NavbarStyles";
-import NavigationDrawer from "./NavigationDrawer";
-
+import useWindowSize from "hooks/useWindowSize";
 const Navbar = () => {
-  return (
-    <AppBar position="relative">
-      <NavigationBar>
-        <StyledNavLink to="ticket">Mua vé</StyledNavLink>
+  const { windowSize } = useWindowSize();
+  const navBarRender = () => {
+    if (windowSize.width < 768) {
+      return <></>;
+    } else {
+      return (
+        <AppBar position="relative">
+          <NavigationBar>
+            <StyledNavLink to="ticket">Mua vé</StyledNavLink>
 
-        <StyledNavLink to="movies">Phim</StyledNavLink>
+            <StyledNavLink to="movie">Phim</StyledNavLink>
 
-        <StyledNavLink to="cinemas">Rạp</StyledNavLink>
+            <StyledNavLink to="cinema">Rạp</StyledNavLink>
 
-        <StyledNavLink to="members">Thành viên</StyledNavLink>
-      </NavigationBar>
-      <NavigationDrawer />
-    </AppBar>
-  );
+            <StyledNavLink to="member">Thành viên</StyledNavLink>
+          </NavigationBar>
+        </AppBar>
+      );
+    }
+  };
+  return navBarRender();
 };
 
 export default Navbar;
