@@ -1,10 +1,14 @@
 import React from "react";
-import Banner from "./Banner";
+import Demo1 from "_playGround/demo1";
+import Demo from "_playGround/demoSwiper";
+import MovieList from "Pages/Homepage/MovieList/MovieList";
+import Slider from "./Slider/Slider";
 
 const Homepage = () => {
   return (
     <div>
-      <Banner />
+      <Slider />
+      <MovieList />
     </div>
   );
 };

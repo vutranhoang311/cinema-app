@@ -4,14 +4,16 @@ import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "store";
+import "./index.css";
+import { StyledEngineProvider } from "@mui/material";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
+    <StyledEngineProvider injectFirst>
       <App />
-    </Provider>
-  </React.StrictMode>
+    </StyledEngineProvider>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

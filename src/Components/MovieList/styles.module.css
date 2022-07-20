@@ -1,0 +1,135 @@
+.swiper {
+  height: fit-content;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.swiper-pagination {
+  position: relative !important;
+  background-color: red !important;
+}
+
+.swiperSlide {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: space;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.cardContent {
+  height: 250px;
+  transition: all 0.5;
+}
+.imageMovie {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.movieDesc {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.layoutTrailer {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  opacity: 0.8;
+  visibility: visible;
+  border-radius: 8px;
+  background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0) 200px
+    ),
+    linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0) 300px);
+  transition: all 0.5;
+}
+
+.btnTrailer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btnTicket {
+  display: block;
+}
+
+.modalBox {
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media (min-width: 768px) {
+  .movieDesc {
+    -webkit-line-clamp: 2;
+  }
+  .swiperSlide:hover .top {
+    display: none !important;
+  }
+  .layoutTrailer {
+    visibility: hidden;
+    opacity: 0;
+  }
+  .btnTicket {
+    display: none;
+  }
+  /* .btnTrailer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5;
+  } */
+  .swiperSlide:hover .layoutTrailer {
+    opacity: 0.8;
+    visibility: visible;
+    transition: all 600ms;
+  }
+  .btnTicket {
+    display: none;
+    /* transition: all 500ms; */
+  }
+  .swiperSlide:hover .btnTicket {
+    display: block;
+  }
+  .cardContent {
+    height: fit-content;
+  }
+}

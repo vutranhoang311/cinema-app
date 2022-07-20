@@ -6,12 +6,12 @@ const NavigationBar = styled(Toolbar)`
   flex-direction: row;
   justify-content: center;
   background-color: #000;
-  @media (max-width: 546px) {
+  /* @media (max-width: 768px) {
     & {
       display: none !important;
       background-color: red;
     }
-  }
+  } */
 `;
 
 const StyledNavLink = styled(NavLink)`

@@ -1,10 +1,19 @@
 import PersonIcon from "@mui/icons-material/Person";
 import { AppBar, Toolbar, Box } from "@mui/material";
 import styled from "styled-components";
-
-const Logo = styled.img`
-  height: 100%;
-  width: 15rem;
+import GalaxyLogo from "Assets/galaxy-logo.png";
+import GalaxyLogoMobile from "Assets/galaxy-logo-mobile.png";
+const Logo = styled(Box)`
+  background-image: url(${GalaxyLogo});
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 30rem;
+  height: 5rem;
+  @media (max-width: 768px) {
+    background-image: url(${GalaxyLogoMobile});
+    width: 10rem;
+  }
 `;
 const StyledToolbar = styled(Toolbar)`
   display: flex;
@@ -33,11 +42,11 @@ const StyledPersonIcon = styled(PersonIcon)`
   padding: 0;
 `;
 
-const LogInBox = styled(Box)`
+const ModalBox = styled(Box)`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   background-color: #ffffff;
 `;
 
@@ -47,5 +56,5 @@ export {
   StyledAppBar,
   StyledPersonIcon,
   StyledLogIn,
-  LogInBox,
+  ModalBox,
 };
