@@ -7,4 +7,9 @@ const axiosClient = axios.create({
   },
 });
 
+axiosClient.interceptors.response.use(
+  (respone) => respone.data.content,
+  (error) => error.response.data.content
+);
+
 export default axiosClient;

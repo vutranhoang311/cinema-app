@@ -9,7 +9,7 @@ import HomeTemplate from "Templates/HomeTemplate";
 import Cinema from "Pages/Cinema/Cinema";
 import Member from "Pages/Member/Member";
 import Homepage from "Pages/Homepage/Homepage";
-import Movie from "Pages/Movie/Movie";
+import Movie from "Templates/HomeMovieShowingTemplate/Movie";
 import Ticket from "Pages/Ticket/Ticket";
 // import PAGES from "Pages/PAGES";
 function App() {

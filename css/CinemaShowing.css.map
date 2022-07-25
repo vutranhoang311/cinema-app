@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACjB,gBAAgB,EAAE,OAAO;CAC1B",
+    "sources": [
+        "../src/Components/CinemaShowing/CinemaShowing.scss"
+    ],
+    "names": [],
+    "file": "CinemaShowing.css"
+}
