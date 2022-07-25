@@ -10,6 +10,14 @@ const theme = createTheme({
       xl: 1400,
     },
   },
+  palette: {
+    primary: {
+      main: "#f44336",
+    },
+    secondary: {
+      main: "#00ac4d",
+    },
+  },
 });
 
 export default theme;

@@ -1,4 +1,9 @@
-import React, {  useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setNowPlayingStatus,
+  setUpcomingPlayingStatus,
+} from "Slices/movieSlice";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -6,25 +11,18 @@ import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
 import styles from "./styles.module.css";
-
 // import required modules
 import { Grid, Pagination } from "swiper";
-
 // import required UI component
-import {
-  Box,
-  Typography,
-  Button,
-  Modal,
-} from "@mui/material";
-
+import { Box, Typography, Button, Modal } from "@mui/material";
 import btnPlay from "Assets/button-play.png";
-import { useNavigate } from "react-router-dom";
 
-const MovieGridCarouselShowing = ({ movieList }) => {
-  const navigate = useNavigate();
+const MovieShowing = ({ movieList }) => {
+  const dispatch = useDispatch();
+  const { nowPlaying, upComingPlaying } = useSelector(
+    (state) => state.movieSlice
+  );
   const [isOpen, setOpenTrailer] = useState(false);
-
   let urlTrailer = useRef(""); // for modal Trailer
   let movieTitle = useRef(""); // for modal Trailer
 
@@ -32,6 +30,13 @@ const MovieGridCarouselShowing = ({ movieList }) => {
     urlTrailer.current = urlTrailerMovie;
     movieTitle.current = movieName;
     setOpenTrailer(!isOpen);
+  };
+
+  const handleNowPlayingList = () => {
+    dispatch(setNowPlayingStatus());
+  };
+  const handleUpcomingPlayingStatus = () => {
+    dispatch(setUpcomingPlayingStatus());
   };
 
   const renderSlide = () => {
@@ -52,7 +57,7 @@ const MovieGridCarouselShowing = ({ movieList }) => {
                 }}
                 className={`${styles.btnTrailer} w-[5rem]`}
               >
-                <img src={btnPlay} alt="play"/>
+                <img src={btnPlay} alt="play" />
               </Button>
             </Box>
           </Box>
@@ -89,6 +94,21 @@ const MovieGridCarouselShowing = ({ movieList }) => {
 
   return (
     <div className="container mx-auto px-4">
+      <Button
+        className={nowPlaying ? `${styles.btnFilterActive}` : ""}
+        variant="outlined"
+        sx={{ marginRight: 2 }}
+        onClick={handleNowPlayingList}
+      >
+        Phim đang chiếu
+      </Button>
+      <Button
+        className={upComingPlaying ? `${styles.btnFilterActive}` : ""}
+        variant="outlined"
+        onClick={handleUpcomingPlayingStatus}
+      >
+        Phim sắp chiếu
+      </Button>
       <Swiper
         className={`${styles.swiper}`}
         tag="section"
@@ -108,7 +128,7 @@ const MovieGridCarouselShowing = ({ movieList }) => {
             slidesPerView: 1,
             spaceBetween: 5,
             grid: {
-              rows: 2,
+              rows: 4,
               fill: "row",
             },
           },
@@ -157,4 +177,4 @@ const MovieGridCarouselShowing = ({ movieList }) => {
   );
 };
 
-export default MovieGridCarouselShowing;
+export default MovieShowing;

@@ -13,7 +13,7 @@ import {
 import NavigationDrawer from "Components/Navbar/NavigationDrawer";
 
 import { Modal, Typography } from "@mui/material";
-import useWindowSize from "hooks/useWindowSize";
+import useWindowSize from "Hooks/useWindowSize";
 
 const Header = () => {
   const { windowSize } = useWindowSize();
@@ -24,7 +24,14 @@ const Header = () => {
   };
 
   return (
-    <StyledAppBar position="relative" color="transparent">
+    <StyledAppBar
+      sx={{
+        position: "sticky",
+        backgroundColor: "rgba(255,255,255,0.95) !important",
+        top: 0,
+        left: 0,
+      }}
+    >
       <StyledToolbar>
         <Link to={""}>
           <Logo />

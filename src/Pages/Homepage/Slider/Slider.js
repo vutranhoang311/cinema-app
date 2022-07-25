@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBanner } from "Slices/movieSlice";
-import BannerShowing from "Components/BannerShowing/BannerShowing";
+import BannerShowing from "Pages/BannerShowing/BannerShowing";
 
 const Slider = () => {
   const dispatch = useDispatch();
   const banners = useSelector((state) => {
-    return state.banners;
+    return state.movieSlice.banners;
   });
 
   useEffect(() => {

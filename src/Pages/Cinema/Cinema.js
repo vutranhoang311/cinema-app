@@ -1,7 +1,15 @@
-import React from "react";
+import CinemaShowing from "Components/CinemaShowing/CinemaShowing";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCinemaScheduleList } from "Slices/cinemaSlice";
 
 const Cinema = () => {
-  return <div>Cinema</div>;
+  const dispatch = useDispatch();
+  const { cinemaList } = useSelector((state) => state.cinemaSlice);
+  useEffect(() => {
+    dispatch(getCinemaScheduleList());
+  }, []);
+  return <CinemaShowing cinemaList={cinemaList} />;
 };
 
 export default Cinema;

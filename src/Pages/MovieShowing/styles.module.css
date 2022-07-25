@@ -93,6 +93,11 @@
   transform: translate(-50%, -50%);
 }
 
+.btnFilterActive {
+  @apply text-white font-semibold;
+  background-color: #f44336 !important;
+}
+
 @media (min-width: 768px) {
   .movieDesc {
     -webkit-line-clamp: 2;

@@ -1,50 +1,45 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import cinemaAPI from "Services/cinemaAPI/cinemaAPI";
+
+const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 const initialState = {
-  cinemas: [
-    {
-      maHeThongRap: "BHDStar",
-      tenHeThongRap: "BHD Star Cineplex",
-      biDanh: "bhd-star-cineplex",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/bhd-star-cineplex.png",
-    },
-    {
-      maHeThongRap: "CGV",
-      tenHeThongRap: "cgv",
-      biDanh: "cgv",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cgv.png",
-    },
-    {
-      maHeThongRap: "CineStar",
-      tenHeThongRap: "CineStar",
-      biDanh: "cinestar",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/cinestar.png",
-    },
-    {
-      maHeThongRap: "Galaxy",
-      tenHeThongRap: "Galaxy Cinema",
-      biDanh: "galaxy-cinema",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/galaxy-cinema.png",
-    },
-    {
-      maHeThongRap: "LotteCinima",
-      tenHeThongRap: "Lotte Cinema",
-      biDanh: "lotte-cinema",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/lotte-cinema.png",
-    },
-    {
-      maHeThongRap: "MegaGS",
-      tenHeThongRap: "MegaGS",
-      biDanh: "megags",
-      logo: "http://movie0706.cybersoft.edu.vn/hinhanh/megags.png",
-    },
-  ],
+  cinemaList: [],
+  isLoading: false,
+  error: null,
 };
+
+const getCinemaScheduleList = createAsyncThunk(
+  "cinema/getCinemaList",
+  async (params, thunkAPI) => {
+    try {
+      const response = await cinemaAPI.getCinemaList();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
 
 const cinemaSlice = createSlice({
   name: "cinemas",
   initialState: initialState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getCinemaScheduleList.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.cinemaList = action.payload;
+    });
+    builder.addCase(getCinemaScheduleList.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getCinemaScheduleList.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
+  },
 });
 
+// export reducer
 export default cinemaSlice.reducer;
+// export actions
+export { getCinemaScheduleList };
