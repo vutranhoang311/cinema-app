@@ -13,7 +13,7 @@ import {
 import NavigationDrawer from "Components/Navbar/NavigationDrawer";
 
 import { Modal, Typography } from "@mui/material";
-import useWindowSize from "Hooks/useWindowSize";
+import useWindowSize from "hooks/useWindowSize";
 
 const Header = () => {
   const { windowSize } = useWindowSize();

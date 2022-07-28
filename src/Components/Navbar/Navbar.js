@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar } from "@mui/material";
 import { StyledNavLink, NavigationBar } from "./NavbarStyles";
-import useWindowSize from "Hooks/useWindowSize";
+import useWindowSize from "hooks/useWindowSize";
 const Navbar = () => {
   const { windowSize } = useWindowSize();
   const navBarRender = () => {
