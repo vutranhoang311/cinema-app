@@ -1,0 +1,18 @@
+.title {
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  padding-left: 1rem;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    height: 22px;
+    width: 4px;
+    background-color: #f26b38;
+  }
+}
+
+a{
+    transition: all 500ms;
+}

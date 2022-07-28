@@ -16,9 +16,11 @@ import { Grid, Pagination } from "swiper";
 // import required UI component
 import { Box, Typography, Button, Modal } from "@mui/material";
 import btnPlay from "Assets/button-play.png";
+import { useNavigate } from "react-router-dom";
 
 const MovieShowing = ({ movieList }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { nowPlaying, upComingPlaying } = useSelector(
     (state) => state.movieSlice
   );
@@ -37,6 +39,10 @@ const MovieShowing = ({ movieList }) => {
   };
   const handleUpcomingPlayingStatus = () => {
     dispatch(setUpcomingPlayingStatus());
+  };
+
+  const goToDetailsPage = (idMovie) => {
+    navigate("/detail/" + idMovie);
   };
 
   const renderSlide = () => {
@@ -82,6 +88,7 @@ const MovieShowing = ({ movieList }) => {
                 variant="contained"
                 size="large"
                 className=" w-full mt-2 py-4 text-white font-semibold text-20 font-bold bg-orange-500 rounded-[5px]"
+                onClick={() => goToDetailsPage(movie.maPhim)}
               >
                 MUA VÉ
               </Button>

@@ -11,6 +11,7 @@ import Member from "Pages/Member/Member";
 import Homepage from "Pages/Homepage/Homepage";
 import Movie from "Templates/HomeMovieShowingTemplate/Movie";
 import Ticket from "Pages/Ticket/Ticket";
+import MovieDetail from "Pages/MovieDetail/MovieDetail";
 // import PAGES from "Pages/PAGES";
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/movie" element={<Movie />} />
             <Route path="/cinema" element={<Cinema />} />
             <Route path="/member" element={<Member />} />
+            <Route path="/detail/:movieId" element={<MovieDetail />} />
             <Route index element={<Homepage />} />
             <Route path="*" element={<Navigate to={""} />} />
           </Route>
