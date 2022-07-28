@@ -9,7 +9,7 @@ const Cinema = () => {
   useEffect(() => {
     dispatch(getCinemaScheduleList());
   }, []);
-  return <CinemaShowing cinemaList={cinemaList} />;
+  if (cinemaList.length) return <CinemaShowing cinemaList={cinemaList} />;
 };
 
 export default Cinema;

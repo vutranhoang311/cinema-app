@@ -4,6 +4,8 @@ const initialState = {
   movieList: [],
   movieListDefault: [],
   banners: [],
+  movie: {},
+  moviePlaySchedule: null,
   nowPlaying: false,
   upComingPlaying: false,
   isLoading: false,
@@ -27,6 +29,30 @@ const getMovieList = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await movieAPI.getMovieList({ params });
+      return response;
+    } catch (error) {
+      throw error.response.data.message;
+    }
+  }
+);
+
+const getMovieInfo = createAsyncThunk(
+  "movie/getMovieInfo",
+  async (params, thunkAPI) => {
+    try {
+      const response = await movieAPI.getMovieInfo(params);
+      return response;
+    } catch (error) {
+      throw error.response.data.message;
+    }
+  }
+);
+
+const getMoviePlaySchedule = createAsyncThunk(
+  "movie/getMoviePlaySchedule",
+  async (params, thunkAPI) => {
+    try {
+      const response = await movieAPI.getMoviePlaySchedule(params);
       return response;
     } catch (error) {
       throw error.response.data.message;
@@ -83,11 +109,37 @@ const movieSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
+    // GET MovieInfo
+    builder.addCase(getMovieInfo.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.movie = action.payload;
+    });
+    builder.addCase(getMovieInfo.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getMovieInfo.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+      console.log(state.error);
+    });
+    // GET Movie Play Schedule
+    builder.addCase(getMoviePlaySchedule.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.moviePlaySchedule = action.payload;
+    });
+    builder.addCase(getMoviePlaySchedule.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getMoviePlaySchedule.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+      console.log(state.error);
+    });
   },
 });
 
 // export actions
-export { getBanner, getMovieList };
+export { getBanner, getMovieList, getMovieInfo, getMoviePlaySchedule };
 export const { setNowPlayingStatus, setUpcomingPlayingStatus } =
   movieSlice.actions;
 // export reducer

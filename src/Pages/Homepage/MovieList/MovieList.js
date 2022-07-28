@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { getMovieList } from "Slices/movieSlice";
 
-import MovieShowing from "Pages/MovieShowing/MovieShowing";
+import MovieShowing from "Components/MovieShowing/MovieShowing";
 
 const MovieList = () => {
   const { movieList } = useSelector((state) => state.movieSlice);
