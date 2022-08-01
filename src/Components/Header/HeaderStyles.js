@@ -47,7 +47,17 @@ const ModalBox = styled(Box)`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 5px;
   background-color: #ffffff;
+  padding: 20px;
+  width: 325px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 768px) {
+    width: 450px;
+  }
 `;
 
 export {

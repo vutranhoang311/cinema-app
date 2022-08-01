@@ -17,7 +17,7 @@ const getBanner = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await movieAPI.getBanner();
-      return response;
+      return response.content;
     } catch (error) {
       throw error.response.data.message;
     }
@@ -29,7 +29,7 @@ const getMovieList = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await movieAPI.getMovieList({ params });
-      return response;
+      return response.content;
     } catch (error) {
       throw error.response.data.message;
     }
@@ -41,7 +41,7 @@ const getMovieInfo = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await movieAPI.getMovieInfo(params);
-      return response;
+      return response.content;
     } catch (error) {
       throw error.response.data.message;
     }
@@ -53,7 +53,7 @@ const getMoviePlaySchedule = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await movieAPI.getMoviePlaySchedule(params);
-      return response;
+      return response.content;
     } catch (error) {
       throw error.response.data.message;
     }

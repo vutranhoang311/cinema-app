@@ -6,7 +6,7 @@ export const mainNavBarItems = [
   {
     id: 0,
     icon: <PersonIcon />,
-    label: "Đăng nhập",
+    label: "Thành viên",
     route: "member",
   },
   { id: 1, icon: <ConfirmationNumberIcon />, label: "Mua vé", route: "ticket" },

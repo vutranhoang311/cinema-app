@@ -8,7 +8,7 @@ import MoviePlaySchedule from "./MoviePlaySchedule";
 
 const MovieDetailShowing = ({ movie, moviePlaySchedule }) => {
   return (
-    <Paper
+    <Box
       sx={{ backgroundImage: `url(${backgroundCinema})` }}
       className="py-2"
     >
@@ -30,7 +30,7 @@ const MovieDetailShowing = ({ movie, moviePlaySchedule }) => {
           <MoviePlaySchedule moviePlaySchedule={moviePlaySchedule} />
         </Box>
       </Container>
-    </Paper>
+    </Box>
   );
 };
 

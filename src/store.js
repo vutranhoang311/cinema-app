@@ -1,6 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cinemaSlice from "Slices/cinemaSlice";
 import movieSlice from "Slices/movieSlice";
-
-const store = configureStore({ reducer: { movieSlice, cinemaSlice } });
+import authenticationSlice from "Slices/authenticationSlice";
+import bookingTicketSlice from "Slices/bookingTicketSlice";
+const store = configureStore({
+  reducer: { movieSlice, cinemaSlice, authenticationSlice, bookingTicketSlice },
+});
 export default store;

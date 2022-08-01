@@ -9,8 +9,8 @@ const Navbar = () => {
       return <></>;
     } else {
       return (
-        <AppBar position="relative">
-          <NavigationBar>
+        <AppBar position="relative" className="bg-[#1a1a1a]">
+          <NavigationBar className="bg-[#1a1a1a]">
             <StyledNavLink to="ticket">Mua vé</StyledNavLink>
 
             <StyledNavLink to="movie">Phim</StyledNavLink>

@@ -10,14 +10,17 @@ import {
   StyledLogIn,
   ModalBox,
 } from "./HeaderStyles";
+import LoginModal from "Components/LoginModal/LoginModal";
 import NavigationDrawer from "Components/Navbar/NavigationDrawer";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Modal, Typography } from "@mui/material";
 import useWindowSize from "hooks/useWindowSize";
+import { useSelector } from "react-redux";
+import MenuUser from "Components/MenuUser/MenuUser";
 
 const Header = () => {
   const { windowSize } = useWindowSize();
-
+  const { currentUser } = useSelector((state) => state.authenticationSlice);
   const [open, setOpenModal] = useState(false);
   const handleOpen = () => {
     setOpenModal(!open);
@@ -37,27 +40,25 @@ const Header = () => {
           <Logo />
         </Link>
         <Box sx={{ display: "flex" }}>
-          {windowSize.width > 768 ? (
+          {currentUser ? (
+            <MenuUser currentUser={currentUser}></MenuUser>
+          ) : (
             <StyledLogIn onClick={handleOpen}>
               <StyledPersonIcon />{" "}
               <Typography variant="p">Đăng nhập</Typography>
             </StyledLogIn>
+          )}
+
+          {windowSize.width > 768 ? (
+            <></>
           ) : (
-            <NavigationDrawer />
+            <>
+              <NavigationDrawer />
+            </>
           )}
         </Box>
       </StyledToolbar>
-
-      <Modal open={open} onClose={handleOpen}>
-        <ModalBox>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-        </ModalBox>
-      </Modal>
+      <LoginModal open={open} handleOpen={handleOpen} />
     </StyledAppBar>
   );
 };

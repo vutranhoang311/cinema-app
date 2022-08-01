@@ -13,9 +13,9 @@ const getCinemaScheduleList = createAsyncThunk(
   async (params, thunkAPI) => {
     try {
       const response = await cinemaAPI.getCinemaList();
-      return response;
+      return response.content;
     } catch (error) {
-      throw error;
+      throw error.content;
     }
   }
 );

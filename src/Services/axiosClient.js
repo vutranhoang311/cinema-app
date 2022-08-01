@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "store";
 
 const axiosClient = axios.create({
   baseURL: "https://movienew.cybersoft.edu.vn/api",
@@ -7,9 +8,15 @@ const axiosClient = axios.create({
   },
 });
 
+axiosClient.interceptors.request.use((config) => {
+  const { accessToken = "" } = store.getState().authenticationSlice;
+  if (accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+  return config;
+});
+
 axiosClient.interceptors.response.use(
-  (response) => response.data.content,
-  (error) => error.response.data.content
+  (response) => response.data,
+  (error) => error.response.data
 );
 
 export default axiosClient;
