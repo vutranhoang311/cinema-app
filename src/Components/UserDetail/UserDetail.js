@@ -14,8 +14,13 @@ const UserDetail = ({ currentUser, accessToken }) => {
   }, []);
   return (
     <div className="text-white">
-      <UserInformations userInformations={currentUser} />
-      <BookedTicketList bookedTicketList={bookedTicketList} />
+      <div className="mb-3">
+        <UserInformations userInformations={currentUser} />
+      </div>
+      <div className="">
+        {" "}
+        <BookedTicketList bookedTicketList={bookedTicketList} />
+      </div>
     </div>
   );
 };
