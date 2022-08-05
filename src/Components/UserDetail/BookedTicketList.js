@@ -27,9 +27,9 @@ const BookedTicketList = ({ bookedTicketList }) => {
               </span>
             </div>
             <div className="seat">
-              {ticket.danhSachGhe.map((seat) => {
+              {ticket.danhSachGhe.map((seat, index) => {
                 return (
-                  <span className="mr-[5px]">
+                  <span key={index} className="mr-[5px]">
                     {seat.tenCumRap} - Ghế {seat.tenGhe}
                   </span>
                 );

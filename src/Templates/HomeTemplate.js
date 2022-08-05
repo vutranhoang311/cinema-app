@@ -9,7 +9,8 @@ const HomeTemplate = () => {
     <div>
       <Header />
       <Navbar />
-      <Outlet /> <Footer />
+      <Outlet /> 
+      <Footer />
     </div>
   );
 };

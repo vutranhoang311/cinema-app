@@ -64,10 +64,19 @@ const UserInformations = ({ userInformations }) => {
   const dispatch = useDispatch();
 
   const onSubmit = (user) => {
-    dispatch(updateUser(user));
+    const updatedUser = {
+      taiKhoan: user.taiKhoan,
+      matKhau: user.matKhau,
+      email: user.email,
+      soDt: user.soDT,
+      hoTen: user.hoTen,
+    };
+    dispatch(updateUser(updatedUser));
   };
 
-  const onError = (error) => {};
+  const onError = (error) => {
+    console.log(error);
+  };
 
   return (
     <div className="w-full flex flex-col justify-center items-center">

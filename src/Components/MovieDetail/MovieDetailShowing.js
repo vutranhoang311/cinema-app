@@ -7,11 +7,9 @@ import MovieDetailContent from "./MovieDetailContent";
 import MoviePlaySchedule from "./MoviePlaySchedule";
 
 const MovieDetailShowing = ({ movie, moviePlaySchedule }) => {
+
   return (
-    <Box
-      sx={{ backgroundImage: `url(${backgroundCinema})` }}
-      className="py-2"
-    >
+    <Box sx={{ backgroundImage: `url(${backgroundCinema})` }} className="py-2">
       <Container>
         <Box className="md:flex md:gap-5 md:justify-center">
           <MovieDetailMedia

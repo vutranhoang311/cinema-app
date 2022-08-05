@@ -10,9 +10,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 import styles from "./styles.module.css";
 // import required modules
-import { Grid, Pagination } from "swiper";
+import { Grid, Pagination, Navigation } from "swiper";
 // import required UI component
 import { Box, Typography, Button, Modal } from "@mui/material";
 import btnPlay from "Assets/button-play.png";
@@ -118,9 +120,10 @@ const MovieShowing = ({ movieList }) => {
       </Button>
       <Swiper
         className={`${styles.swiper}`}
+        modules={[Grid, Pagination, Navigation]}
         tag="section"
         wrapperTag="div"
-        modules={[Grid, Pagination]}
+        navigation={true}
         slidesPerView={1}
         grid={{
           rows: 4,

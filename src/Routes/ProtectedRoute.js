@@ -1,13 +1,27 @@
-import React from "react";
+import LoginModal from "Components/LoginModal/LoginModal";
+import PurchaseTicket from "Pages/PurchaseTicket/PurchaseTicket";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 
-const ProtectedRoute = ({ children }) => {
-  const { currentUser } = useSelector((state) => state.autheticationSlice);
-  if(!currentUser){
-    return <h1></h1>
+const ProtectedRoute = () => {
+  // const { currentUser } = useSelector((state) => state.autheticationSlice);
+  // console.log(currentUser);
+  const [open, setOpenModal] = useState(true);
+  const handleOpen = () => {
+    setOpenModal(!open);
+  };
+  const navigate = useNavigate();
+  const accessToken = localStorage.getItem("accessToken");
+  if (!accessToken) {
+    return (
+      <>
+        <Navigate to="member"></Navigate>{" "}
+        <LoginModal open={open} handleOpen={handleOpen} />
+      </>
+    );
   }
-
-  return <div>{children}</div>;
+  return <Outlet />;
 };
 
 export default ProtectedRoute;

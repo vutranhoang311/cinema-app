@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 const { default: userAPI } = require("Services/userAPI/UserAPI");
 
@@ -129,6 +131,13 @@ const authenticationSlice = createSlice({
     // update user informations
     builder.addCase(updateUser.fulfilled, (state, action) => {
       state.isLoading = false;
+      if (action.payload.statusCode) {
+        Swal.fire({
+          title: "Cập nhật thành công",
+          icon: "success",
+          timer: 2000,
+        });
+      }
     });
     builder.addCase(updateUser.pending, (state, action) => {
       state.isLoading = true;

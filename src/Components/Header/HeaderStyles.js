@@ -1,18 +1,19 @@
 import PersonIcon from "@mui/icons-material/Person";
 import { AppBar, Toolbar, Box } from "@mui/material";
 import styled from "styled-components";
-import GalaxyLogo from "Assets/galaxy-logo.png";
-import GalaxyLogoMobile from "Assets/galaxy-logo-mobile.png";
+import WebLogo from "Assets/web-logo.png";
+import LogoMobile from "Assets/web-logo-2.png";
 const Logo = styled(Box)`
-  background-image: url(${GalaxyLogo});
+  background-image: url(${WebLogo});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  width: 30rem;
+  width: 7rem;
   height: 5rem;
   @media (max-width: 768px) {
-    background-image: url(${GalaxyLogoMobile});
-    width: 10rem;
+    background-image: url(${LogoMobile});
+    width: 5rem;
+
   }
 `;
 const StyledToolbar = styled(Toolbar)`

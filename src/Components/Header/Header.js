@@ -10,9 +10,10 @@ import {
   StyledLogIn,
   ModalBox,
 } from "./HeaderStyles";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import LoginModal from "Components/LoginModal/LoginModal";
 import NavigationDrawer from "Components/Navbar/NavigationDrawer";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Modal, Typography } from "@mui/material";
 import useWindowSize from "hooks/useWindowSize";
 import { useSelector } from "react-redux";
@@ -39,23 +40,20 @@ const Header = () => {
         <Link to={""}>
           <Logo />
         </Link>
+        <Box>
+          
+        </Box>
         <Box sx={{ display: "flex" }}>
           {currentUser ? (
             <MenuUser currentUser={currentUser}></MenuUser>
           ) : (
             <StyledLogIn onClick={handleOpen}>
-              <StyledPersonIcon />{" "}
+              <AccountCircleIcon sx={{ marginRight: 0.5 }} />
               <Typography variant="p">Đăng nhập</Typography>
             </StyledLogIn>
           )}
 
-          {windowSize.width > 768 ? (
-            <></>
-          ) : (
-            <>
-              <NavigationDrawer />
-            </>
-          )}
+          {windowSize.width < 768 && <NavigationDrawer />}
         </Box>
       </StyledToolbar>
       <LoginModal open={open} handleOpen={handleOpen} />

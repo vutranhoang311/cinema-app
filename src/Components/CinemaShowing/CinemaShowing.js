@@ -10,9 +10,10 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import theme from "theme";
-
+import logo from "Assets/web-logo.png";
 // import "./CinemaShowing.scss";
 const StyledTabs = styled(Tabs)`
   & .MuiTabs-indicator {
@@ -67,6 +68,7 @@ const StyledTab = styled(Tab)`
 `;
 
 const CinemaShowing = ({ cinemaList }) => {
+  const navigate = useNavigate();
   const [cinemaIndex, setCinemaIndex] = React.useState(0);
   const handleChangeCinema = (event, newValue, idCinemaLocation) => {
     setCinemaIndex(newValue);
@@ -160,6 +162,10 @@ const CinemaShowing = ({ cinemaList }) => {
                     <img
                       src={film.hinhAnh}
                       alt={film.tenPhim}
+                      onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = "https://picsum.photos/120/100";
+                      }}
                       className="h-[120px] w-[100px] object-cover"
                     />
                     <div className="content w-[80%] pl-5">
@@ -171,7 +177,15 @@ const CinemaShowing = ({ cinemaList }) => {
                           .map((lichChieu) => {
                             return (
                               <div key={lichChieu.maLichChieu} className="">
-                                <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                                <button
+                                  onClick={() => {
+                                    console.log(lichChieu.maLichChieu);
+                                    navigate(
+                                      `purchase/${lichChieu.maLichChieu}`
+                                    );
+                                  }}
+                                  className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                                >
                                   <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                     {dayjs(lichChieu.ngayChieuGioChieu).format(
                                       "MM-DD-YYYY HH:mm"

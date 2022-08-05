@@ -1,4 +1,12 @@
-import { Alert, Box, Button, Modal, TextField } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Modal,
+  TextField,
+  Backdrop,
+  Fade,
+} from "@mui/material";
 import { ModalBox } from "Components/Header/HeaderStyles";
 import React, { useEffect, useRef, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -26,8 +34,8 @@ const LoginModal = ({ open, handleOpen }) => {
   );
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      taiKhoan: "",
-      matKhau: "",
+      taiKhoan: "tranhoangvu311",
+      matKhau: "chip@0212",
     },
   });
   const onSubmit = (values) => {
@@ -50,47 +58,61 @@ const LoginModal = ({ open, handleOpen }) => {
     isFirstRun.current = false;
   }, [currentUser]);
   return (
-    <Modal open={open} onClose={handleOpen}>
-      <ModalBox>
-        <Box sx={{ marginBottom: 2, textAlign: "center" }}>
-          <AccountCircleIcon htmlColor="#fb4226" fontSize="large" />
-          <h1 style={{ fontSize: 20, fontWeight: 700 }}>ĐĂNG NHẬP</h1>
-        </Box>
-        <Box sx={{ width: "100%", marginBottom: 2 }}>
-          <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            style={{ display: "flex", flexDirection: "column" }}
-          >
-            <TextField
-              id="taiKhoan"
-              label="Tài khoản"
-              type="text"
-              variant="outlined"
-              sx={{ marginBottom: 2 }}
-              {...register("taiKhoan")}
-            />
-            <TextField
-              id="matKhau"
-              label="Mật khẩu"
-              type="password"
-              variant="outlined"
-              sx={{ marginBottom: 2 }}
-              {...register("matKhau")}
-            />{" "}
-            {error && (
-              <Alert severity="error" className="mb-4" sx={{ marginBottom: 2 }}>
-                {error}
-              </Alert>
-            )}
-            <ButtonLogin type="submit" variant="contained">
-              ĐĂNG NHẬP
-            </ButtonLogin>
-          </form>
-        </Box>
-        <NavLinkRegister to="/member" onClick={handleOpen}>
-          Bạn chưa có tài khoản? Đăng ký
-        </NavLinkRegister>
-      </ModalBox>
+    <Modal
+      open={open}
+      onClose={handleOpen}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={open}>
+        <ModalBox>
+          <Box sx={{ marginBottom: 2, textAlign: "center" }}>
+            <AccountCircleIcon htmlColor="#fb4226" fontSize="large" />
+            <h1 style={{ fontSize: 20, fontWeight: 700 }}>ĐĂNG NHẬP</h1>
+          </Box>
+          <Box sx={{ width: "100%", marginBottom: 2 }}>
+            <form
+              onSubmit={handleSubmit(onSubmit, onError)}
+              style={{ display: "flex", flexDirection: "column" }}
+            >
+              <TextField
+                id="taiKhoan"
+                label="Tài khoản"
+                type="text"
+                variant="outlined"
+                sx={{ marginBottom: 2 }}
+                {...register("taiKhoan")}
+              />
+              <TextField
+                id="matKhau"
+                label="Mật khẩu"
+                type="password"
+                variant="outlined"
+                sx={{ marginBottom: 2 }}
+                {...register("matKhau")}
+              />{" "}
+              {error && (
+                <Alert
+                  severity="error"
+                  className="mb-4"
+                  sx={{ marginBottom: 2 }}
+                >
+                  {error}
+                </Alert>
+              )}
+              <ButtonLogin type="submit" variant="contained">
+                ĐĂNG NHẬP
+              </ButtonLogin>
+            </form>
+          </Box>
+          <NavLinkRegister to="/member" onClick={handleOpen}>
+            Bạn chưa có tài khoản? Đăng ký
+          </NavLinkRegister>
+        </ModalBox>
+      </Fade>
     </Modal>
   );
 };

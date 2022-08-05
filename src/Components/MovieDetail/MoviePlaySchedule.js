@@ -4,6 +4,7 @@ import styles from "./movieDetailContent.module.scss";
 import styled from "styled-components";
 import theme from "theme";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,10 +60,25 @@ const StyledTab = styled(Tab)`
 `;
 
 const MoviePlaySchedule = ({ moviePlaySchedule }) => {
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  if (!moviePlaySchedule) {
+    return;
+  }
+
+  if (moviePlaySchedule.heThongRapChieu.length === 0) {
+    return (
+      <Box>
+        {" "}
+        <h2 className={`${styles["title"]} my-4 text-white`}>
+          KHÔNG CÓ LỊCH CHIẾU
+        </h2>
+      </Box>
+    );
+  }
   const renderLogoTab = () => {
     return moviePlaySchedule.heThongRapChieu.map(
       (cinemaLocationList, index) => {
@@ -99,10 +115,16 @@ const MoviePlaySchedule = ({ moviePlaySchedule }) => {
                       </h2>
                     </Box>
                   </Grid>
-                  {cinemaLocation.lichChieuPhim.map((lichChieu,index) => {
+                  {cinemaLocation.lichChieuPhim.map((lichChieu, index) => {
                     return (
                       <Grid key={index} item xs={6} sm={3} className="">
-                        <button className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+                        <button
+                          onClick={() => {
+                            console.log("lichChieu")
+                            navigate(`/purchase/${lichChieu.maLichChieu}`);
+                          }}
+                          className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                        >
                           <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                             {dayjs(lichChieu.ngayChieuGioChieu).format(
                               "MM-DD-YYYY HH:mm"
@@ -121,14 +143,9 @@ const MoviePlaySchedule = ({ moviePlaySchedule }) => {
     );
   };
 
-  if (!moviePlaySchedule)
-    return (
-      <h2 className={`${styles["title"]} my-4`}>PHIM NÀY CHƯA ĐƯỢC CHIẾU</h2>
-    );
-
   return (
     <Box>
-      <h2 className={`${styles["title"]} my-4`}>LỊCH CHIẾU</h2>
+      <h2 className={`${styles["title"]} my-4 text-white`}>LỊCH CHIẾU</h2>
       <Box
         sx={{
           flexGrow: 1,
