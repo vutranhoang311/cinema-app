@@ -9,17 +9,51 @@ const Navbar = () => {
       return <></>;
     } else {
       return (
-        <AppBar position="relative" className="bg-[#1a1a1a]">
-          <NavigationBar className="bg-[#1a1a1a]">
-            <StyledNavLink to="ticket">Mua vé</StyledNavLink>
+        <NavigationBar className="">
+          <StyledNavLink
+            href=""
+            to="movie-showing"
+            spy={true}
+            smooth={true}
+            offset={-75}
+            duration={500}
+          >
+            Lịch chiếu
+          </StyledNavLink>
 
-            <StyledNavLink to="movie">Phim</StyledNavLink>
+          <StyledNavLink
+            href=""
+            to="cinema-showing"
+            spy={true}
+            smooth={true}
+            offset={-75}
+            duration={500}
+          >
+            Cụm rạp
+          </StyledNavLink>
 
-            <StyledNavLink to="cinema">Rạp</StyledNavLink>
+          <StyledNavLink
+            href=""
+            to="news-showing"
+            spy={true}
+            smooth={true}
+            offset={-75}
+            duration={500}
+          >
+            Tin tức
+          </StyledNavLink>
 
-            <StyledNavLink to="member">Thành viên</StyledNavLink>
-          </NavigationBar>
-        </AppBar>
+          <StyledNavLink
+            href=""
+            to="application-showing"
+            spy={true}
+            smooth={true}
+            offset={-75}
+            duration={500}
+          >
+            Ứng dụng
+          </StyledNavLink>
+        </NavigationBar>
       );
     }
   };

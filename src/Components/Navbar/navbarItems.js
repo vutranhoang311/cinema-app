@@ -1,15 +1,15 @@
 import ConfirmationNumberIcon from "@mui/icons-material/ConfirmationNumber";
-import PersonIcon from "@mui/icons-material/Person";
+import ArticleIcon from "@mui/icons-material/Article";
 import MovieIcon from "@mui/icons-material/Movie";
-import StadiumIcon from "@mui/icons-material/Stadium";
+import AppsIcon from "@mui/icons-material/Apps";
 export const mainNavBarItems = [
   {
     id: 0,
-    icon: <PersonIcon />,
-    label: "Đăng ký",
-    route: "member",
+    icon: <MovieIcon />,
+    label: "Lịch chiếu",
+    to: "movie-showing",
   },
-  { id: 1, icon: <ConfirmationNumberIcon />, label: "Mua vé", route: "ticket" },
-  { id: 2, icon: <MovieIcon />, label: "Phim", route: "movie" },
-  { id: 3, icon: <StadiumIcon />, label: "Rạp", route: "cinema" },
+  { id: 1, icon: <ConfirmationNumberIcon />, label: "Cụm rạp", to: "cinema-showing" },
+  { id: 2, icon: <ArticleIcon />, label: "Tin tức", to: "news-showing" },
+  { id: 3, icon: <AppsIcon />, label: "Ứng dụng", to: "application-showing" },
 ];

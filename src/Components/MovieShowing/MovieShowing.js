@@ -102,7 +102,7 @@ const MovieShowing = ({ movieList }) => {
   };
 
   return (
-    <div className="container mx-auto px-4">
+    <div id="movie-showing" className="container mx-auto px-4">
       <Button
         className={nowPlaying ? `${styles.btnFilterActive}` : ""}
         variant="outlined"

@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import theme from "theme";
 import logo from "Assets/web-logo.png";
+import ScrollAnimation from "react-animate-on-scroll";
 // import "./CinemaShowing.scss";
 const StyledTabs = styled(Tabs)`
   & .MuiTabs-indicator {
@@ -110,35 +111,37 @@ const CinemaShowing = ({ cinemaList }) => {
           index={index}
           className="w-[200px]"
         >
-          <StyledTabs
-            orientation="vertical"
-            variant="scrollable"
-            value={cinemaLocationIndex}
-            onChange={handleChangeCinemaLocation}
-            aria-label="cinema-localtion-list-tabs"
-            sx={{
-              borderRight: 1,
-              borderColor: "divider",
-              height: 640,
-            }}
-          >
-            {cinemaLocationList.lstCumRap.map(
-              (cinemaLocation, locationIndex) => {
-                return (
-                  <StyledTab
-                    key={locationIndex}
-                    value={locationIndex + cinemaLocation.maCumRap}
-                    label={
-                      <div className="w-full text-left">
-                        <p>{cinemaLocation.tenCumRap}</p>
-                      </div>
-                    }
-                    {...a11yProps(cinemaLocation.maCumRap)}
-                  />
-                );
-              }
-            )}
-          </StyledTabs>
+          <ScrollAnimation animateIn="animate__fadeIn">
+            <StyledTabs
+              orientation="vertical"
+              variant="scrollable"
+              value={cinemaLocationIndex}
+              onChange={handleChangeCinemaLocation}
+              aria-label="cinema-localtion-list-tabs"
+              sx={{
+                borderRight: 1,
+                borderColor: "divider",
+                height: 640,
+              }}
+            >
+              {cinemaLocationList.lstCumRap.map(
+                (cinemaLocation, locationIndex) => {
+                  return (
+                    <StyledTab
+                      key={locationIndex}
+                      value={locationIndex + cinemaLocation.maCumRap}
+                      label={
+                        <div className="w-full text-left">
+                          <p>{cinemaLocation.tenCumRap}</p>
+                        </div>
+                      }
+                      {...a11yProps(cinemaLocation.maCumRap)}
+                    />
+                  );
+                }
+              )}
+            </StyledTabs>
+          </ScrollAnimation>
         </TabPanel>
       );
     });
@@ -156,50 +159,55 @@ const CinemaShowing = ({ cinemaList }) => {
               index={locationIndex + cinemaLocation.maCumRap}
               className="h-[640px] overflow-y-scroll overflow-x-hidden"
             >
-              {cinemaLocation.danhSachPhim.map((film, filmIndex) => {
-                return (
-                  <div key={film.maPhim} className={`flex p-2  border-b-[1px]`}>
-                    <img
-                      src={film.hinhAnh}
-                      alt={film.tenPhim}
-                      onError={({ currentTarget }) => {
-                        currentTarget.onerror = null; // prevents looping
-                        currentTarget.src = "https://picsum.photos/120/100";
-                      }}
-                      className="h-[120px] w-[100px] object-cover"
-                    />
-                    <div className="content w-[80%] pl-5">
-                      <h3 className="font-semibold mb-2">{film.tenPhim}</h3>
-                      <p>{cinemaLocation.diaChi}</p>
-                      <div className="grid grid-cols-3 gap-2">
-                        {film.lstLichChieuTheoPhim
-                          .slice(0, 12)
-                          .map((lichChieu) => {
-                            return (
-                              <div key={lichChieu.maLichChieu} className="">
-                                <button
-                                  onClick={() => {
-                                    console.log(lichChieu.maLichChieu);
-                                    navigate(
-                                      `purchase/${lichChieu.maLichChieu}`
-                                    );
-                                  }}
-                                  className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
-                                >
-                                  <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                    {dayjs(lichChieu.ngayChieuGioChieu).format(
-                                      "MM-DD-YYYY HH:mm"
-                                    )}
-                                  </span>
-                                </button>
-                              </div>
-                            );
-                          })}
+              <ScrollAnimation animateIn="animate__fadeIn">
+                {cinemaLocation.danhSachPhim.map((film, filmIndex) => {
+                  return (
+                    <div
+                      key={film.maPhim}
+                      className={`flex p-2  border-b-[1px]`}
+                    >
+                      <img
+                        src={film.hinhAnh}
+                        alt={film.tenPhim}
+                        onError={({ currentTarget }) => {
+                          currentTarget.onerror = null; // prevents looping
+                          currentTarget.src = "https://picsum.photos/120/100";
+                        }}
+                        className="h-[120px] w-[100px] object-cover"
+                      />
+                      <div className="content w-[80%] pl-5">
+                        <h3 className="font-semibold mb-2">{film.tenPhim}</h3>
+                        <p>{cinemaLocation.diaChi}</p>
+                        <div className="grid grid-cols-3 gap-2">
+                          {film.lstLichChieuTheoPhim
+                            .slice(0, 12)
+                            .map((lichChieu) => {
+                              return (
+                                <div key={lichChieu.maLichChieu} className="">
+                                  <button
+                                    onClick={() => {
+                                      console.log(lichChieu.maLichChieu);
+                                      navigate(
+                                        `purchase/${lichChieu.maLichChieu}`
+                                      );
+                                    }}
+                                    className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800"
+                                  >
+                                    <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                      {dayjs(
+                                        lichChieu.ngayChieuGioChieu
+                                      ).format("MM-DD-YYYY HH:mm")}
+                                    </span>
+                                  </button>
+                                </div>
+                              );
+                            })}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </ScrollAnimation>
             </TabPanel>
           );
         }
@@ -210,6 +218,7 @@ const CinemaShowing = ({ cinemaList }) => {
   return (
     <Container>
       <Box
+        id="cinema-showing"
         sx={{
           border: "1px solid rgba(238,238,238,.88)",
           marginTop: 1,

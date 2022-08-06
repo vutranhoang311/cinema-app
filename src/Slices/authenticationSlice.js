@@ -36,7 +36,15 @@ const updateUser = createAsyncThunk(
   "user/updateUser",
   async (user, thunkAPI) => {
     try {
-      const response = await userAPI.updateUser(user);
+      const response = await userAPI.updateUser({
+        taiKhoan: user.taiKhoan,
+        matKhau: user.matKhau,
+        email: user.email,
+        soDt: user.soDt,
+        maNhom: "GP01",
+        maLoaiNguoiDung: user.maLoaiNguoiDung || "KhachHang",
+        hoTen: user.hoTen,
+      });
       return response;
     } catch (error) {
       throw error;
@@ -133,7 +141,7 @@ const authenticationSlice = createSlice({
       state.isLoading = false;
       if (action.payload.statusCode) {
         Swal.fire({
-          title: "Cập nhật thành công",
+          title: action.payload.content,
           icon: "success",
           timer: 2000,
         });

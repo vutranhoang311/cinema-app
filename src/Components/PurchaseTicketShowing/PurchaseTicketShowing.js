@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import MovieInformations from "./MovieInformations";
 import PurchaseDetail from "./PurchaseDetail";
 
-const PurchaseTicketShowing = ({ ticketListByMovie }) => {
+const PurchaseTicketShowing = ({ ticketListByMovie, playingDateId }) => {
   const { isLoading, choosingSeats, totalPrice } = useSelector(
     (state) => state.bookingTicketSlice
   );
@@ -20,7 +20,10 @@ const PurchaseTicketShowing = ({ ticketListByMovie }) => {
         />
       </Box>
       <Box>
-        <PurchaseDetail seatList={ticketListByMovie?.danhSachGhe} />
+        <PurchaseDetail
+          playingDateId={playingDateId}
+          seatList={ticketListByMovie?.danhSachGhe}
+        />
       </Box>
       <Box>
         <MovieInformations

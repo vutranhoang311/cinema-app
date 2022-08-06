@@ -51,11 +51,11 @@ const BookedTicketList = ({ bookedTicketList }) => {
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="bg-white text-black w-full lg:w-[90%] flex flex-col justify-center items-center p-3  rounded">
-        <div className="w-full md:w-[80%]">
-          <h1 className="text-black font-extrabold mb-5">Lịch sử đặt vé </h1>
-          <div className="flex flex-wrap lg:flex-col h-[480px] overflow-x-hidden">
-            {renderTicket()}
-          </div>
+        <div className="w-full md:w-[90%] ">
+          <h1 className="text-black md:text-3xl font-extrabold mb-5">Lịch sử đặt vé </h1>
+        </div>
+        <div className=" w-full md:w-[90%] flex flex-col md:flex-wrap md:flex-row h-[480px] overflow-x-hidden">
+          {renderTicket()}
         </div>
       </div>
     </div>

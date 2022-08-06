@@ -15,7 +15,12 @@ const PurchaseTicket = () => {
     // call API maLichChieu
     dispatch(getTicketList(playingDateId));
   }, []);
-  return <PurchaseTicketShowing ticketListByMovie={ticketListByMovie} />;
+  return (
+    <PurchaseTicketShowing
+      playingDateId={playingDateId}
+      ticketListByMovie={ticketListByMovie}
+    />
+  );
 };
 
 export default PurchaseTicket;

@@ -2,8 +2,10 @@ import { Button, Container } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { modifyChoosingSeats } from "Slices/bookingTicketSlice";
+import { useNavigate } from "react-router-dom";
+import { modifyChoosingSeats, purchaseTicket } from "Slices/bookingTicketSlice";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 
 const Seat = styled.button`
   height: 30px;
@@ -13,11 +15,11 @@ const Seat = styled.button`
   margin: 0 8px 8px 0;
 `;
 
-const PurchaseDetail = ({ seatList }) => {
+const PurchaseDetail = ({ seatList, playingDateId }) => {
+  const navigate = useNavigate();
   const { choosingSeats } = useSelector((state) => state.bookingTicketSlice);
   const dispatch = useDispatch();
   if (!seatList) return;
-
   const renderSeats = () => {
     return seatList.map((seat, index) => {
       let classChoosingSeat = "";
@@ -50,14 +52,23 @@ const PurchaseDetail = ({ seatList }) => {
 
   const handlePurchaseTicket = () => {
     const ticket = {
-      maLichChieu: 0,
-      danhSachVe: [
-        {
-          maGhe: 0,
-          giaVe: 0,
-        },
-      ],
+      maLichChieu: playingDateId,
+      danhSachVe: choosingSeats,
     };
+    dispatch(purchaseTicket(ticket))
+      .unwrap()
+      .then((originalPromiseResult) => {
+        Swal.fire({
+          title: originalPromiseResult.content,
+          icon: "success",
+          timer: 2000,
+        });
+        navigate("/member");
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        // handle error here
+        console.log(rejectedValueOrSerializedError);
+      });
   };
   return (
     <Container>
@@ -98,7 +109,7 @@ const PurchaseDetail = ({ seatList }) => {
           </Box>
         </Box>
         <Button
-          onClick={handlePurchaseTicket()}
+          onClick={handlePurchaseTicket}
           variant="contained"
           className="w-full p-1 m-2 bg-[#689f39] hover:bg-[#689f99] max-w-[500px]
         text-left text-[18px] md:text-3xl text-white break-words"

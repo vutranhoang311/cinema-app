@@ -14,6 +14,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import styled from "styled-components";
 
 import { mainNavBarItems } from "./navbarItems";
+import { StyledNavLink } from "./NavbarStyles";
 
 const NavDrawer = styled(Drawer)`
   background-color: transparent;
@@ -26,29 +27,30 @@ const NavigationDrawer = () => {
   const toggleDrawer = () => {
     setOpenDrawer(!openDrawer);
   };
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
 
   return (
     <React.Fragment>
-      <NavDrawer open={openDrawer} onClose={toggleDrawer} anchor="top">
+      <NavDrawer open={openDrawer} onClose={toggleDrawer} anchor="right">
         <List>
           {mainNavBarItems.map((item) => {
             return (
-              <ListItemButton
-                key={item.id}
-                onClick={() => {
-                  handleNavigate(item.route);
-                  toggleDrawer();
-                }}
-              >
+              <ListItemButton key={item.id}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText>
+                <StyledNavLink
+                  onClick={() => {
+                    toggleDrawer();
+                  }}
+                  href=""
+                  to={item.to}
+                  spy={true}
+                  smooth={true}
+                  offset={-75}
+                  duration={500}
+                >
                   <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                     {item.label}
                   </Typography>
-                </ListItemText>
+                </StyledNavLink>
               </ListItemButton>
             );
           })}

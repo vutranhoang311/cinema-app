@@ -6,6 +6,9 @@ const ticketAPI = {
       `/QuanLyDatVe/LayDanhSachPhongVe?maLichChieu=${maLichChieu}`
     );
   },
+  purchaseTicket: (ticketData) => {
+    return axiosClient.post(`/QuanLyDatVe/DatVe`, ticketData);
+  },
 };
 
 export default ticketAPI;

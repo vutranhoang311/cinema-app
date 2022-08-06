@@ -17,7 +17,19 @@ const getTicketList = createAsyncThunk(
       const response = await ticketAPI.getTicketList(idMovie);
       return response;
     } catch (error) {
-      throw error.content;
+      console.log(error);
+    }
+  }
+);
+
+const purchaseTicket = createAsyncThunk(
+  "ticket/purchase",
+  async (ticketData, thunkAPI) => {
+    try {
+      const response = await ticketAPI.purchaseTicket(ticketData);
+      return response;
+    } catch (error) {
+      console.log(error);
     }
   }
 );
@@ -40,6 +52,7 @@ const bookingTicketSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // GET TICKET LISTS
     builder.addCase(getTicketList.fulfilled, (state, action) => {
       state.isLoading = false;
       state.ticketListByMovie = action.payload.content;
@@ -51,10 +64,22 @@ const bookingTicketSlice = createSlice({
       state.isLoading = false;
       state.error = action.error.message;
     });
+    // purchaseTicket
+    builder.addCase(purchaseTicket.fulfilled, (state, action) => {
+      state.isLoading = false;
+      
+    });
+    builder.addCase(purchaseTicket.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(purchaseTicket.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
   },
 });
 
 export default bookingTicketSlice.reducer;
 
-export { getTicketList };
+export { getTicketList, purchaseTicket };
 export const { modifyChoosingSeats } = bookingTicketSlice.actions;

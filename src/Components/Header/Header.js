@@ -18,6 +18,7 @@ import { Modal, Typography } from "@mui/material";
 import useWindowSize from "hooks/useWindowSize";
 import { useSelector } from "react-redux";
 import MenuUser from "Components/MenuUser/MenuUser";
+import Navbar from "Components/Navbar/Navbar";
 
 const Header = () => {
   const { windowSize } = useWindowSize();
@@ -31,7 +32,7 @@ const Header = () => {
     <StyledAppBar
       sx={{
         position: "sticky",
-        backgroundColor: "rgba(255,255,255,0.95) !important",
+        backgroundColor: "rgba(255,255,255,1) !important",
         top: 0,
         left: 0,
       }}
@@ -41,7 +42,7 @@ const Header = () => {
           <Logo />
         </Link>
         <Box>
-          
+          <Navbar />
         </Box>
         <Box sx={{ display: "flex" }}>
           {currentUser ? (
